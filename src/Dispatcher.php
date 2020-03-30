@@ -1,9 +1,9 @@
 <?php
 
+namespace App;
 
 class Dispatcher
 {
-
 	/**
 	 * @var IGrabber
 	 */
@@ -26,9 +26,19 @@ class Dispatcher
 	/**
 	 * @return string JSON
 	 */
-	public function run()
+	public function run(): string
 	{
-		// code here
+        $products = new ProductList(__DIR__ . '/../vstup.txt');
+
+        foreach($products as $productId) {
+        	$this->output->addRow([
+        		$productId => [
+                	'price' => $this->grabber->getPrice($productId),
+        		],
+        	]);
+        }
+
+        return $this->output->getJson();
 	}
 
 }

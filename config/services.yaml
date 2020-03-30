@@ -1,0 +1,16 @@
+parameters:
+    grabber.uri: 'https://www.czc.cz/{productId}/hledat'
+    grabber.uriPlaceholder: '{productId}'
+    grabber.price.xpath: "substring-before(substring-after(string(//div[@class='new-tile']/@data-ga-impression), 'price\":'), ',\"quantity')"
+
+services:
+    grabber:
+        class:     App\HtmlGrabber
+        arguments: ['%grabber.uri%', '%grabber.uriPlaceholder%']
+        calls:
+            - [setPriceXPath, ['%grabber.price.xpath%']]
+    output:
+        class:     App\ArrayOutput
+    dispatcher:
+        class:     App\Dispatcher
+        arguments: ['@grabber', '@output']
