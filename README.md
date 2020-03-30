@@ -6,5 +6,3 @@ Mozno bude treba pred spustenim Dockeru na WIN spravne nastafit format suboru na
 $ docker-compose run --rm default install 
 $ docker-compose run --rm default
 ```
-
-entrypoint.sh
