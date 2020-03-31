@@ -34,6 +34,8 @@ class Dispatcher
         	$this->output->addRow([
         		$productId => [
                 	'price' => $this->grabber->getPrice($productId),
+                	'title' => $this->grabber->getTitle($productId),
+                	'rating' => $this->grabber->getRating($productId),
         		],
         	]);
         }

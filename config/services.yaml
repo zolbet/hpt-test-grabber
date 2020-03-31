@@ -2,6 +2,8 @@ parameters:
     grabber.uri: 'https://www.czc.cz/{productId}/hledat'
     grabber.uriPlaceholder: '{productId}'
     grabber.price.xpath: "substring-before(substring-after(string(//div[@class='new-tile']/@data-ga-impression), 'price\":'), ',\"quantity')"
+    grabber.title.xpath: "substring-before(substring-after(string(//div[@class='new-tile']/@data-ga-impression), 'name\":\"'), '\",\"position')"
+    grabber.rating.xpath: "substring-before(substring-after(string(//div[@class='new-tile']//span[@class='rating']/@title), ': '), ' %')"
 
 services:
     grabber:
@@ -9,6 +11,8 @@ services:
         arguments: ['%grabber.uri%', '%grabber.uriPlaceholder%']
         calls:
             - [setPriceXPath, ['%grabber.price.xpath%']]
+            - [setTitleXPath, ['%grabber.title.xpath%']]
+            - [setRatingXPath, ['%grabber.rating.xpath%']]
     output:
         class:     App\ArrayOutput
     dispatcher:
